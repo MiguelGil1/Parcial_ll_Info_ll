@@ -1,3 +1,0 @@
-Avance Dia 1:
-
-Se conecta fila con fila, pero se evidencia que se esta opteniendo una impresion por columnas, algo no deseado, por lo que se propone repensar la conexion.
