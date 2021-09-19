@@ -1,0 +1,5 @@
+18 DE SEPTIEMBRE DE 2021:
+
+Se analiza como se podria desarrollar el algoritmo de redimensionar la imagen(bandera) que se quira mostrar en la matriz de 16X16 Neopixeles.
+ 
+La prim era idea que se propone es dividir la imagen en cuadriculas de 16X16 y recorrer cada una de las 256 cuadriculas resultantes, en cada cuadricula se promedia pixel a pixel la cantidad de rojo, verde y azul y el valor promediado es el que se mostrara en la matriz de leds.
