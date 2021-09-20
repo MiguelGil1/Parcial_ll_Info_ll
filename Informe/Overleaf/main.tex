@@ -45,6 +45,37 @@ Para la implementación del circuito en la plataforma Tinkercad, primeramente se
   \item Se le suministra potencia de 5 Voltios a la tira de Neopixel procedentes del Arduino
   \item Se conecta el polo a tierra procedente del Arduino a la tira de Neopixel.
 \end{enumerate}
+\begin{figure}[h]
+  \includegraphics[width=10cm]{figura_1.png}
+  \centering
+  \caption{Prender fila numero uno de la matriz.}
+  \label{fig:fila_uno}
+\end{figure}
+Se comenzó la etapa de pruebas con la tira de Neopixel, ejemplo de algunas pruebas que se realizaron:
+\begin{enumerate}
+    \item Cómo prender un Neopixel en específico.
+    \item Cómo mostrar un patrón en una tira (ejemplo: Solo prender las posiciones impares, solo prender las posiciones pares).
+    \item Cómo prender todos los leds e a la vez.
+\end{enumerate}
+Una vez superada esta etapa de prueba se agregaron las 15 filas restantes, para obtener una especie de matriz de 16 X 16, en primer lugar se realiza la conexión desde la fila uno hasta la fila cinco de la siguiente manera:
+\begin{enumerate}
+    \item Se conecta entrada de la fila N con la entrada de la fila N+1.
+    \item Se conecta la potencia de la fila N con la potencia de la fila N+1.
+    \item Se conecta la tierra de la fila N con la tierra de la fila N+1.
+\end{enumerate}
+Al intentar interactuar con la matriz, por ejemplo prender una Neopixel en específico se evidencio que tenía un comportamiento de prender por columnas, conducta para nada esperada.\\
+\begin{figure}[h]
+  \includegraphics[width=10cm]{figura_2.png}
+  \centering
+  \caption{Comportamiento no esperado.}
+  \label{fig:por_columnas}
+\end{figure}
+Al evidenciar este comportamiento, de inmediato se repiensa la manera de como realizar satisfactoriamente la conexión. Hasta que se llego hasta la siguiente idea:
+\begin{enumerate}
+    \item Se conecta salida de la fila N con la entrada de la fila N+1.
+    \item Se conecta la potencia de la fila N con la potencia de la fila N+1.
+    \item Se conecta la tierra de la fila N con la tierra de la fila N+1.
+\end{enumerate}
 \bibliographystyle{IEEEtran}
 \bibliography{references}
 \end{document}
