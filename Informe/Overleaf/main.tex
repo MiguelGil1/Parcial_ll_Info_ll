@@ -1,28 +1,82 @@
 \documentclass{article}
-
-% Language setting
-% Replace `english' with e.g. `spanish' to change the document language
-\usepackage[english]{babel}
-
-% Set page size and margins
-% Replace `letterpaper' with`a4paper' for UK/EU standard size
-\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
-
-% Useful packages
-\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{listings}
 \usepackage{graphicx}
-\usepackage[colorlinks=true, allcolors=blue]{hyperref}
-
-\title{Your Paper}
-\author{You}
+\graphicspath{ {images/} }
+\usepackage{cite}
 
 \begin{document}
-\maketitle
 
-\begin{abstract}
-Your abstract.
-\end{abstract}
-
-\section{Introduction}
-
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+            
+        \Huge
+        \textbf{Analisis Parcial II - Informatica II.}
+            
+        \vspace{0.5cm}
+        \LARGE
+            
+        \vspace{1.5cm}
+            
+        \textbf{Luis Miguel Gil Rodriguez.}
+        \\
+        \textbf{Maverick Sossa Tobon.}
+        \vfill
+        \vspace{0.8cm}
+            
+        \Large
+        Despartamento de Ingeniería Electrónica y Telecomunicaciones\\
+        Universidad de Antioquia\\
+        Medellín\\
+        Marzo de 2021
+            
+    \end{center}
+\end{titlepage}
+\tableofcontents
+\newpage
+\section{Sección introductoria} \label{intro}
+En este documento, podremos encontrar las ideas para abordar el parcial numero dos del curso Informatica II. Encontraremos en el detalles tales como el lgoritmo de redimensionamiento de imagenes para luego se mostrados en una martriz de LEDs de un tamaño ce 16 por 16 LEDs.
+\section{Circuito.} \label{contenido}
+Para la implementación del circuito en la plataforma Tinkercad, primeramente se comenzaron a realizar ensayos con una tira de 16 Neopixeles, la cual se conecta de la siguiente manera:
+\begin{enumerate}
+  \item La primera fila se conecta al puerto 2 del Arduino
+  \item Se le suministra potencia de 5 Voltios a la tira de Neopixel procedentes del Arduino
+  \item Se conecta el polo a tierra procedente del Arduino a la tira de Neopixel.
+\end{enumerate}
+\begin{figure}[h]
+  \includegraphics[width=10cm]{figura_1.png}
+  \centering
+  \caption{Prender fila numero uno de la matriz.}
+  \label{fig:fila_uno}
+\end{figure}
+Se comenzó la etapa de pruebas con la tira de Neopixel, ejemplo de algunas pruebas que se realizaron:
+\begin{enumerate}
+    \item Cómo prender un Neopixel en específico.
+    \item Cómo mostrar un patrón en una tira (ejemplo: Solo prender las posiciones impares, solo prender las posiciones pares).
+    \item Cómo prender todos los leds e a la vez.
+\end{enumerate}
+Una vez superada esta etapa de prueba se agregaron las 15 filas restantes, para obtener una especie de matriz de 16 X 16, en primer lugar se realiza la conexión desde la fila uno hasta la fila cinco de la siguiente manera:
+\begin{enumerate}
+    \item Se conecta entrada de la fila N con la entrada de la fila N+1.
+    \item Se conecta la potencia de la fila N con la potencia de la fila N+1.
+    \item Se conecta la tierra de la fila N con la tierra de la fila N+1.
+\end{enumerate}
+Al intentar interactuar con la matriz, por ejemplo prender una Neopixel en específico se evidencio que tenía un comportamiento de prender por columnas, conducta para nada esperada.\\
+\begin{figure}[h]
+  \includegraphics[width=10cm]{figura_2.png}
+  \centering
+  \caption{Comportamiento no esperado.}
+  \label{fig:por_columnas}
+\end{figure}
+Al evidenciar este comportamiento, de inmediato se repiensa la manera de como realizar satisfactoriamente la conexión. Hasta que se llego hasta la siguiente idea:
+\begin{enumerate}
+    \item Se conecta salida de la fila N con la entrada de la fila N+1.
+    \item Se conecta la potencia de la fila N con la potencia de la fila N+1.
+    \item Se conecta la tierra de la fila N con la tierra de la fila N+1.
+\end{enumerate}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
 \end{document}
+
