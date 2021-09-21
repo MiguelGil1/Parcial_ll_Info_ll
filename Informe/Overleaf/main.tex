@@ -1,0 +1,140 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{listings}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{cite}
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+            
+        \Huge
+        \textbf{Analisis Parcial II - Informatica II.}
+            
+        \vspace{0.5cm}
+        \LARGE
+            
+        \vspace{1.5cm}
+            
+        \textbf{Luis Miguel Gil Rodriguez.}
+        \\
+        \textbf{Maverick Sossa Tobon.}
+        \vfill
+        \vspace{0.8cm}
+            
+        \Large
+        Despartamento de Ingeniería Electrónica y Telecomunicaciones\\
+        Universidad de Antioquia\\
+        Medellín\\
+        Marzo de 2021
+            
+    \end{center}
+\end{titlepage}
+\tableofcontents
+\newpage
+\section{Sección introductoria} \label{intro}
+En este documento, podremos encontrar las ideas para abordar el parcial numero dos del curso Informatica II. Encontraremos en el detalles tales como el lgoritmo de redimensionamiento de imagenes para luego se mostrados en una martriz de LEDs de un tamaño ce 16 por 16 LEDs.
+\section{Análisis del problema} \label{Analisis del problema}
+
+\section{Algoritmo} \label{algoritmo}
+En el planteamiento del algoritmo solución se defininen, de forma general, las subtareas y datos que unidos y ordenados permiten obtener el cometido: un programa de redimensionamiento de imagenes. Entonces, para tener una idea aproximada del funcionamiento de tal programa, se hace necesario describir ciertos subprocesos. 
+
+\subsection{Inicialización} \label{Inicializacion}
+En el intanciamiento de un objeto quien se enccarga de inicializar ciertos datos es el contructor. 
+El constructor sobrecargado recibirá: 
+\begin{enumerate}
+  \item Tamaño del redimensionamiento.
+  
+  En primera instancia corresponde a las dimensiones de la matriz de leds RGB de 16x16 que se planea usar para la solución del problema.
+  Esto para adaptarlo a otra posible matriz de leds de dimensiones distintas. 
+  \item Nombre archivo .txt
+  
+  Corresponde al único dato que debe ingresar el usuario: el nombre del archivo donde se almacenará el segmento de código correspondiente a las matrices, las cuales contendrán los datos de la imágen ya redimensionada. 
+  Es una ruta relativa, en usuario debe conocer la ubicación de tal archivo .txt.
+  
+\end{enumerate}
+\subsection{Atributos} \label{Atributos} 
+En la creación de la clase, los atributos definen características importantes del objeto y almacenan datos necesarios para la ejecución de ciertos métodos. 
+
+\begin{enumerate}
+  \item Matrices bidimensionales de cada color
+  
+  Tres corresponden a los datos de la imagen redimensionada. 
+  Una para rojo, otra para verde y otra para azul. Se obtendrá con la ejecución de métodos, y despues, con otro método, se guardará en un archivo .txt.
+  
+  \item Ancho y largo de la redimensión
+  
+  Fueron inicializados en el constructor. Se usarán constantemente, pues son las dimensiones a la cual se quiere llegar.
+  
+  \item Objeto QImagen
+  
+  Se obtiene a partir del dato ingresado por el usuario: la ruta a la imagen a redimensionar. Con él se tendrá acceso a todos los datos de la imagen, los cuales serán usados en el proceso de redimensionamiento bajo un algoritmo implementado que cumple 
+  
+\end{enumerate}
+
+\section{Circuito.} \label{circuito}
+Para la implementación del circuito en la plataforma Tinkercad, primeramente se comenzaron a realizar ensayos con una tira de 16 Neopixeles, la cual se conecta de la siguiente manera:
+\begin{enumerate}
+  \item La primera fila se conecta al puerto 2 del Arduino
+  \item Se le suministra potencia de 5 Voltios a la tira de Neopixel procedentes del Arduino
+  \item Se conecta el polo a tierra procedente del Arduino a la tira de Neopixel.
+\end{enumerate}
+\begin{figure}[h]
+  \includegraphics[width=10cm]{figura_1.png}
+  \centering
+  \caption{Prender fila numero uno de la matriz.}
+  \label{fig:fila_uno}
+\end{figure}
+Se comenzó la etapa de pruebas con la tira de Neopixel, ejemplo de algunas pruebas que se realizaron:
+\begin{enumerate}
+    \item Cómo prender un Neopixel en específico.
+    \item Cómo mostrar un patrón en una tira (ejemplo: Solo prender las posiciones impares, solo prender las posiciones pares).
+    \item Cómo prender todos los leds e a la vez.
+\end{enumerate}
+Una vez superada esta etapa de prueba se agregaron las 15 filas restantes, para obtener una especie de matriz de 16 X 16, en primer lugar se realiza la conexión desde la fila uno hasta la fila cinco de la siguiente manera:
+\begin{enumerate}
+    \item Se conecta entrada de la fila N con la entrada de la fila N+1.
+    \item Se conecta la potencia de la fila N con la potencia de la fila N+1.
+    \item Se conecta la tierra de la fila N con la tierra de la fila N+1.
+\end{enumerate}
+Al intentar interactuar con la matriz, por ejemplo prender una Neopixel en específico se evidencio que tenía un comportamiento de prender por columnas, conducta para nada esperada.\\
+\begin{figure}[h]
+  \includegraphics[width=10cm]{figura_2.png}
+  \centering
+  \caption{Comportamiento no esperado.}
+  \label{fig:por_columnas}
+\end{figure}
+Al evidenciar este comportamiento, de inmediato se repiensa la manera de como realizar satisfactoriamente la conexión. Hasta que se llego hasta la siguiente idea:
+\begin{enumerate}
+    \item Se conecta salida de la fila N con la entrada de la fila N+1.
+    \item Se conecta la potencia de la fila N con la potencia de la fila N+1.
+    \item Se conecta la tierra de la fila N con la tierra de la fila N+1.
+\end{enumerate}
+Luego de haber realizado dicha conexión, se comenzó una nueva etapa de pruebas con el mismo, se intento prender todas las filas conectas, un Neopixel en específico y por último un patrón sencillo, como prender solo las posiciones impares, la diagonal principal de la matriz entre otras pruebas.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=8cm]{figura_3.png}
+  \caption{Prender la diagonal principal.}
+  \label{fig:diagonal_ppal}
+\end{figure}
+A continuacion se mostrara el circuito desarrollado, cabe mencionar, que el aspecto que aqui se muestra no sera el definiticvo, pues se reorganizaran las tiras de Neopixel de una manera mas estetica.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=8cm]{figura_4.png}
+  \caption{Circuito final.}
+  \label{fig:circuito_final}
+\end{figure}
+\begin{enumerate}
+    \item Los cables de color verde se encargan de llevar los datos a la matriz de LEDs
+    \item Los cables de color Negro representan la el Polo a Tierra.
+    \item Los cables de color Rojo representan la potencia (5.0 V).
+    \item Se conecta un suministro de energia, el cual alimentara la matriz de LEDs, es decir suministrara potencia a partir de la fila 9 de nuestra matriz. El suministro de energia suministra 5.0 Voltios a la matriz de LEDs.
+\end{enumerate}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+\end{document}
+
