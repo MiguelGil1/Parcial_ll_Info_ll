@@ -38,11 +38,39 @@
 \newpage
 \section{Sección introductoria} \label{intro}
 En este documento, podremos encontrar las ideas para abordar el parcial numero dos del curso Informatica II. Encontraremos en el detalles tales como el lgoritmo de redimensionamiento de imagenes para luego se mostrados en una martriz de LEDs de un tamaño ce 16 por 16 LEDs.
-\section{Analisis del Problema} \label{analisis}
+\section{Analisis del Problema} \label{Analisis}
 Desde un principio se tuvo en mente que nuestro algoritmo debe estar en capacidad de redimensionar imágenes que sean tanto mas chiquitas como mas grandes que nuestra matriz de LEDs de 16 X 16.
 \\
 \\
-Seguido de eso, surgió una primera idea para el algoritmo de redimensionamiento, el cual seria en dividir la imagen en 16 X 16 cuadriculas para un total de 256 subregiones, con el objetivo de recorrer cada una de ellas y sacar un promedio de la intensidad de rojo, verde y azul de cada píxel que abarca la subregión. Pero luego de dialogar un raro acerca de dicho método se llegó a la conclusión de que no funcionaria tan bien para imágenes más pequeñas que nuestra matriz.
+Seguido de eso, surgió una primera idea para el algoritmo de redimensionamiento, el cual seria en dividir la imagen en 16 X 16 cuadriculas para un total de 256 subregiones, con el objetivo de recorrer cada una de ellas y sacar un promedio de la intensidad de rojo, verde y azul de cada píxel que abarca la subregión, en la matriz de LEDs se mostraría el promedio de cada uno de los colores.
+\\
+\\
+Se planea desarrollar y evaluar cada uno de los algoritmos aquí descritos para mirar cuales son sus fortalezas y debilidades, y como podemos emplear cada uno de ellos en un escenario en específico.
+\\
+\\
+Luego de que el programa de QT aplique el algoritmo de redimensionamiento sobre la imagen, el programa debe estar en la capacidad de generar un archivo de texto que dentro del contenga tres matrices, cada matriz tendrá 256 elementos, los cuales representaran la intensidad de cada uno de los colores RGB. La información de ese archivo de texto debe ser tal como:
+\\
+\\
+RedMatrix [16][16] = {...};
+\\
+GreenMatrix [16][16] = {...};
+\\
+BlueMatrix [16][16] = {...};
+\\
+\\
+O se esta pensando en generar una matrices unidimensionales:\\
+\\
+\\
+RedMatrix [256] = {...};
+\\
+GreenMatrix [256] = {...};
+\\
+BlueMatrix [256] = {...};
+\\
+
+Las cuales van a ser copiadas directamente al código de Tinkercad para que se muestre en la matriz de LEDs.
+
+
 
 \section{Algoritmo} \label{algoritmo}
 Aqui va la descripcion del algoritmo :)
