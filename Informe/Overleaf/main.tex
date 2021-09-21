@@ -30,7 +30,7 @@
         Despartamento de Ingeniería Electrónica y Telecomunicaciones\\
         Universidad de Antioquia\\
         Medellín\\
-        Marzo de 2021
+        Septiembre de 2021
             
     \end{center}
 \end{titlepage}
@@ -38,6 +38,8 @@
 \newpage
 \section{Sección introductoria} \label{intro}
 En este documento, podremos encontrar las ideas para abordar el parcial numero dos del curso Informatica II. Encontraremos en el detalles tales como el lgoritmo de redimensionamiento de imagenes para luego se mostrados en una martriz de LEDs de un tamaño ce 16 por 16 LEDs.
+\section{Analisis del Problema} \label{analisis}
+Aqui va la el analisis :)
 \section{Algoritmo} \label{algoritmo}
 Aqui va la descripcion del algoritmo :)
 \section{Circuito.} \label{circuito}
@@ -79,19 +81,15 @@ Al evidenciar este comportamiento, de inmediato se repiensa la manera de como re
     \item Se conecta la tierra de la fila N con la tierra de la fila N+1.
 \end{enumerate}
 Luego de haber realizado dicha conexión, se comenzó una nueva etapa de pruebas con el mismo, se intento prender todas las filas conectas, un Neopixel en específico y por último un patrón sencillo, como prender solo las posiciones impares, la diagonal principal de la matriz entre otras pruebas.
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=8cm]{figura_3.png}
-  \caption{Prender la diagonal principal.}
-  \label{fig:diagonal_ppal}
-\end{figure}
+
+\centering
+\includegraphics[width=8cm]{figura_3.png}
+  
 A continuacion se mostrara el circuito desarrollado, cabe mencionar, que el aspecto que aqui se muestra no sera el definiticvo, pues se reorganizaran las tiras de Neopixel de una manera mas estetica.
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=8cm]{figura_4.png}
-  \caption{Circuito final.}
-  \label{fig:circuito_final}
-\end{figure}
+
+\centering
+\includegraphics[width=8cm]{figura_4.png}
+
 \begin{enumerate}
     \item Los cables de color verde se encargan de llevar los datos a la matriz de LEDs
     \item Los cables de color Negro representan la el Polo a Tierra.
