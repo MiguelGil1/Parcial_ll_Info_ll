@@ -43,7 +43,34 @@ En este documento, podremos encontrar las ideas para abordar el parcial numero d
 Desde un principio se tuvo en mente que nuestro algoritmo debe estar en capacidad de redimensionar imágenes que sean tanto mas chiquitas como mas grandes que nuestra matriz de LEDs de 16 X 16.
 \\
 \\
+En lo que respecta al procesamiento de la imagen, se deduce que puede haber 5 casos:
+\begin{enumerate}
+    \item La imagen sea de 16 X 16 (Caso ideal).
+    \item El ancho sea mayor que 16 pero el alto menor que 16.
+    \item El ancho sea menor que 16 pero el alto mayor que 16.
+    \item EL ancho y el ato mayores que 16.
+    \item El ancho y el alto menores que 16.
+\end{enumerate}
+En los casos 2 y 5 pueden haber 4 subcasos:
+\begin{enumerate}
+    \item La división entre el ancho y 16 sea entero.
+    \item La división entre el ancho y 16 sea decimal.
+    \item La división entre el alto y 16 sea entero.
+    \item La división entre el alto y 16 sea decimal.
+\end{enumerate}
 Seguido de eso, surgió una primera idea para el algoritmo de redimensionamiento, el cual seria en dividir la imagen en 16 X 16 cuadriculas para un total de 256 subregiones, con el objetivo de recorrer cada una de ellas y sacar un promedio de la intensidad de rojo, verde y azul de cada píxel que abarca la subregión, en la matriz de LEDs se mostraría el promedio de cada uno de los colores.
+\\
+\\
+Surgió un segundo algoritmo, el cual involucra dividir la imagen como se describió en el anterior algoritmo, seleccionar los datos de la mitad y realizar un promedio entre ellos. La intensidad de cada color de dicho promedio es el que se va mostrar en la matriz de LEDs.
+\\
+\\
+El tercer algoritmo que surgió fue con respecto a la moda (el dato, en este caso intensidad de color que más se repite en la subregión), la moda de cada subregión será la que se va a mostrar en la matriz de LEDs.
+\\
+\\
+Se debe de tener en cuenta que al dividir la imagen en 256 cuadriculas, el alto y el ancho de cada una de ellas (subregión) sea un numero decimal, por ende, se debe tomar la parte entera de dicho número y la suma de los residuos será el tamaño del ancho o alto de la última subregión.
+\\
+\\
+La metodología de los algoritmos anteriormente descritos tiene sentido cuando ancho y alto de la imagen a aplicarle el algoritmo es mayor a 16, por ende también se pensó como proceder cuando uno de estos sea menor a 16, en este caso, se debe dividir entre 16 el ancho o el alto de la imagen, y dicho número representará la cantidad de veces que se repetirá el dato en la matriz de LEDs.
 \\
 \\
 Se planea desarrollar y evaluar cada uno de los algoritmos aquí descritos para mirar cuales son sus fortalezas y debilidades, y como podemos emplear cada uno de ellos en un escenario en específico.
@@ -106,9 +133,9 @@ En la creación de la clase, los atributos definen características importantes 
 \section{Circuito.} \label{circuito}
 Para la implementación del circuito en la plataforma Tinkercad, primeramente se comenzaron a realizar ensayos con una tira de 16 Neopixeles, la cual se conecta de la siguiente manera:
 \begin{enumerate}
-  \item La primera fila se conecta al puerto 2 del Arduino
-  \item Se le suministra potencia de 5 Voltios a la tira de Neopixel procedentes del Arduino
-  \item Se conecta el polo a tierra procedente del Arduino a la tira de Neopixel.
+  \item La primera fila se conecta al puerto 2 del Arduino.
+  \item Se le suministra potencia de 5 Voltios a la tira de Neopixel procedentes del Arduino.
+  \item Se conecta el polo a tierra procedente del Arduino a la tira del Neopixel.
 \end{enumerate}
 \begin{figure}[h]
   \includegraphics[width=10cm]{figura_1.png}
@@ -153,9 +180,9 @@ A continuacion se mostrara el circuito desarrollado, cabe mencionar, que el aspe
 
 \begin{enumerate}
     \item Los cables de color verde se encargan de llevar los datos a la matriz de LEDs
-    \item Los cables de color Negro representan la el Polo a Tierra.
+    \item Los cables de color Negro representan el Polo a Tierra.
     \item Los cables de color Rojo representan la potencia (5.0 V).
-    \item Se conecta un suministro de energia, el cual alimentara la matriz de LEDs, es decir suministrara potencia a partir de la fila 9 de nuestra matriz. El suministro de energia suministra 5.0 Voltios a la matriz de LEDs.
+    \item Se conecta un suministro de energia, el cual alimentara la matriz de LEDs, es decir suministrara potencia a partir de la fila 9 de nuestra matriz. Este mismo alimentará con 5.0 Voltios a la matriz de LEDs.
 \end{enumerate}
 \bibliographystyle{IEEEtran}
 \bibliography{references}
