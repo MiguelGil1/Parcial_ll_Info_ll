@@ -30,7 +30,11 @@
         Despartamento de Ingeniería Electrónica y Telecomunicaciones\\
         Universidad de Antioquia\\
         Medellín\\
+<<<<<<< HEAD
         Marzo de 2021
+=======
+        Septiembre de 2021
+>>>>>>> f4f2f3789b1426beb4cce26cd4d26ee83efc2657
             
     \end{center}
 \end{titlepage}
@@ -38,6 +42,7 @@
 \newpage
 \section{Sección introductoria} \label{intro}
 En este documento, podremos encontrar las ideas para abordar el parcial numero dos del curso Informatica II. Encontraremos en el detalles tales como el lgoritmo de redimensionamiento de imagenes para luego se mostrados en una martriz de LEDs de un tamaño ce 16 por 16 LEDs.
+<<<<<<< HEAD
 \section{Análisis del problema} \label{Analisis del problema}
 
 \section{Algoritmo} \label{algoritmo}
@@ -76,6 +81,44 @@ En la creación de la clase, los atributos definen características importantes 
   
 \end{enumerate}
 
+=======
+\section{Analisis del Problema} \label{Analisis}
+Desde un principio se tuvo en mente que nuestro algoritmo debe estar en capacidad de redimensionar imágenes que sean tanto mas chiquitas como mas grandes que nuestra matriz de LEDs de 16 X 16.
+\\
+\\
+Seguido de eso, surgió una primera idea para el algoritmo de redimensionamiento, el cual seria en dividir la imagen en 16 X 16 cuadriculas para un total de 256 subregiones, con el objetivo de recorrer cada una de ellas y sacar un promedio de la intensidad de rojo, verde y azul de cada píxel que abarca la subregión, en la matriz de LEDs se mostraría el promedio de cada uno de los colores.
+\\
+\\
+Se planea desarrollar y evaluar cada uno de los algoritmos aquí descritos para mirar cuales son sus fortalezas y debilidades, y como podemos emplear cada uno de ellos en un escenario en específico.
+\\
+\\
+Luego de que el programa de QT aplique el algoritmo de redimensionamiento sobre la imagen, el programa debe estar en la capacidad de generar un archivo de texto que dentro del contenga tres matrices, cada matriz tendrá 256 elementos, los cuales representaran la intensidad de cada uno de los colores RGB. La información de ese archivo de texto debe ser tal como:
+\\
+\\
+RedMatrix [16][16] = {...};
+\\
+GreenMatrix [16][16] = {...};
+\\
+BlueMatrix [16][16] = {...};
+\\
+\\
+O se esta pensando en generar una matrices unidimensionales:\\
+\\
+\\
+RedMatrix [256] = {...};
+\\
+GreenMatrix [256] = {...};
+\\
+BlueMatrix [256] = {...};
+\\
+
+Las cuales van a ser copiadas directamente al código de Tinkercad para que se muestre en la matriz de LEDs.
+
+
+
+\section{Algoritmo} \label{algoritmo}
+Aqui va la descripcion del algoritmo :)
+>>>>>>> f4f2f3789b1426beb4cce26cd4d26ee83efc2657
 \section{Circuito.} \label{circuito}
 Para la implementación del circuito en la plataforma Tinkercad, primeramente se comenzaron a realizar ensayos con una tira de 16 Neopixeles, la cual se conecta de la siguiente manera:
 \begin{enumerate}
@@ -115,6 +158,7 @@ Al evidenciar este comportamiento, de inmediato se repiensa la manera de como re
     \item Se conecta la tierra de la fila N con la tierra de la fila N+1.
 \end{enumerate}
 Luego de haber realizado dicha conexión, se comenzó una nueva etapa de pruebas con el mismo, se intento prender todas las filas conectas, un Neopixel en específico y por último un patrón sencillo, como prender solo las posiciones impares, la diagonal principal de la matriz entre otras pruebas.
+<<<<<<< HEAD
 \begin{figure}[h]
   \centering
   \includegraphics[width=8cm]{figura_3.png}
@@ -128,6 +172,17 @@ A continuacion se mostrara el circuito desarrollado, cabe mencionar, que el aspe
   \caption{Circuito final.}
   \label{fig:circuito_final}
 \end{figure}
+=======
+
+\centering
+\includegraphics[width=8cm]{figura_3.png}
+  
+A continuacion se mostrara el circuito desarrollado, cabe mencionar, que el aspecto que aqui se muestra no sera el definiticvo, pues se reorganizaran las tiras de Neopixel de una manera mas estetica.
+
+\centering
+\includegraphics[width=8cm]{figura_4.png}
+
+>>>>>>> f4f2f3789b1426beb4cce26cd4d26ee83efc2657
 \begin{enumerate}
     \item Los cables de color verde se encargan de llevar los datos a la matriz de LEDs
     \item Los cables de color Negro representan la el Polo a Tierra.
