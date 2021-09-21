@@ -107,7 +107,7 @@ El constructor sobrecargado recibirá:
 \begin{enumerate}
   \item Tamaño del redimensionamiento.
   
-  En primera instancia corresponde a las dimensiones de la matriz de leds RGB de 16x16 que se planea usar para la solución del problema.
+  En primera instancia, corresponde a las dimensiones de la matriz de leds RGB de 16x16 que se planea usar para la solución del problema.
   Esto para adaptarlo a otra posible matriz de leds de dimensiones distintas. 
   \item Nombre archivo .txt
   
@@ -115,24 +115,49 @@ El constructor sobrecargado recibirá:
   Es una ruta relativa, en usuario debe conocer la ubicación de tal archivo .txt.
   
 \end{enumerate}
-\subsection{Atributos} \label{Atributos} 
+\subsection{Características} \label{Característica} 
 En la creación de la clase, los atributos definen características importantes del objeto y almacenan datos necesarios para la ejecución de ciertos métodos. 
 
 \begin{enumerate}
   \item Matrices bidimensionales de cada color
   
   Tres corresponden a los datos de la imagen redimensionada. 
-  Una para rojo, otra para verde y otra para azul. Se obtendrá con la ejecución de métodos, y despues, con otro método, se guardará en un archivo .txt.
+  Una para rojo, otra para verde y otra para azul. Se obtendrá con la ejecución de una tarea, y despues, con otro tarea, se almacenará en un archivo .txt.
   
   \item Ancho y largo de la redimensión
   
-  Fueron inicializados en el constructor. Se usarán constantemente, pues son las dimensiones a la cual se quiere llegar.
+  Fueron inicializados al inicio del programa. Se usarán constantemente, pues son las dimensiones a la cual se quiere llegar.
   
-  \item Objeto QImagen
+  \item Variable que almacena los datos de la imagen
   
-  Se obtiene a partir del dato ingresado por el usuario: la ruta a la imagen a redimensionar. Con él se tendrá acceso a todos los datos de la imagen, los cuales serán usados en el proceso de redimensionamiento bajo un algoritmo implementado que cumple 
+  Se obtiene a partir del dato ingresado por el usuario: la ruta de la imagen a redimensionar. Con ella se tendrá acceso a todos los datos de la imagen, los cuales serán usados en el proceso de redimensionamiento bajo un algoritmo implementado que cumple con el cometido
   
 \end{enumerate}
+
+\subsection{Funcionalidades} \label{Fucionalidades}
+Para la ejecución de ciertos subprocesos serán necesario los aspectos descritos previamente. Cada uno cumple con papel importante, por lo que su estructura tiene en cuenta la lógica sobre la que se basa el programa para redimensionar la imagen. 
+
+\begin{enumerate}
+    \item Organización de la información 
+    
+    Realiza el proceso de ordenar la información de la imagen en una estructura de datos. Esto para después poder disponer de ella con mayor comodidad y eficiencia. 
+    
+    \item Algoritmo de redimensionamiento. 
+    
+    Es la parte más importante del programa. Alrededor de tal proceso giran otros subprocesos que ayudan a obtener el resultado esperado. 
+    Después de un análisis el problema, se emplean diferentes técnicas, en base a una lógica, que serán implementadas de la ejecución del programa. 
+    
+    \item Guardado en archivo .txt
+    
+    Una vez realizado el proceso de redimensionar la imagen, se procede a almacenar, ordenadamente, la información obtenida. Esto para después poder ver el resultado obtenido en una simulación de tinkerkad. 
+    
+\end{enumerate}
+\begin{figure}[h]
+  \includegraphics[width=10cm]{flowchart.jpeg}
+  \centering
+  \caption{Diagrama de flujo.}
+  \label{fig:flowchart}
+\end{figure}
 
 \section{Circuito.} \label{circuito}
 Para la implementación del circuito en la plataforma Tinkercad, primeramente se comenzaron a realizar ensayos con una tira de 16 Neopixeles, la cual se conecta de la siguiente manera:
