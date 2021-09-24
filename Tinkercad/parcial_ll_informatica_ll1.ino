@@ -128,8 +128,8 @@ uint8_t BlueMatrix [256] = {
 void setup(){
   leds.begin();
   Serial.begin(9600);
-  mostrarBandera();
-  cleanMatrix();
+  //mostrarBandera();
+  //cleanMatrix();
   mostrarBandera2D();
 }
 
@@ -162,14 +162,14 @@ void mostrarBandera2D(){
   uint8_t R = 0;
   uint8_t G = 0;
   uint8_t B = 0;
-  int cont = 1;
+  int cont = 0;
   for(int i = 0; i < 16; i++){
     for(int j = 0; j < 16; j++){
       R = RedMatrix2D[i][j];
       G = GreenMatrix2D[i][j];
       B = BlueMatrix2D[i][j];
-      leds.setPixelColor(i,R,G,B);
-      Serial.print(cont);
+      leds.setPixelColor(cont,R,G,B);
+      Serial.print(cont+1);
       Serial.print(".) ");
       Serial.print("{");
       Serial.print(R); 
