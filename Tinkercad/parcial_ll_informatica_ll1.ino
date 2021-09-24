@@ -9,10 +9,11 @@ Adafruit_NeoPixel leds(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
 //PROTOTIPO DE FUNCIONES
 void cleanMatrix();
 void mostrarBandera();
+void mostrarBandera2D();
 //FIN DECLARACION PROTOTIPO DE FUNCIONES
 
 //DELCARACION DE VARIABLES
-int RedMatrix2D [16][16]= {
+uint8_t RedMatrix2D [16][16]= {
   {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
   {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
   {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
@@ -30,7 +31,7 @@ int RedMatrix2D [16][16]= {
   {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
   {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20}
 };
-int RedMatrix [256]= {
+uint8_t RedMatrix [256]= {
   20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
   20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
   20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
@@ -48,7 +49,7 @@ int RedMatrix [256]= {
   20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
   20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20
 };
-int GreenMatrix2D [16][16] = {
+uint8_t GreenMatrix2D [16][16] = {
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -66,7 +67,7 @@ int GreenMatrix2D [16][16] = {
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0} 
 };
-int GreenMatrix [256]= {
+uint8_t GreenMatrix [256]= {
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -85,7 +86,7 @@ int GreenMatrix [256]= {
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 };
 
-int BlueMatrix2D [16][16] = {
+uint8_t BlueMatrix2D [16][16] = {
   {255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255},
   {255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255},
   {255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255},
@@ -104,7 +105,7 @@ int BlueMatrix2D [16][16] = {
   {255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255}
 };
 
-int BlueMatrix [256] = {
+uint8_t BlueMatrix [256] = {
   255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
   255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
   255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
@@ -126,66 +127,69 @@ int BlueMatrix [256] = {
 
 void setup(){
   leds.begin();
-  Serial.begin(9600); 
+  Serial.begin(9600);
+  mostrarBandera();
+  cleanMatrix();
+  mostrarBandera2D();
 }
 
-void loop(){
-  /*for(int i = 0; i < LED_COUNT; i++){
-    leds.setPixelColor(i,20,0,255);    
-  }
-  leds.show();
-  delay(100);
-  cleanMatrix();
-  for(int i = 0; i < LED_COUNT; i+=2){
-    leds.setPixelColor(i,20,0,255);    
-  }
-  leds.show();
-  delay(100);
-  cleanMatrix();
-  for(int i = 0; i < LED_COUNT; i+=17){
-    leds.setPixelColor(i,20,0,255);    
-  }
-  leds.show();
-  delay(100);
-  cleanMatrix();*/
-  //mostrarBandera();
-  //cleanMatrix();
+void loop(){}
+
+void mostrarBandera(){
+  uint8_t R = 0;
+  uint8_t G = 0;
+  uint8_t B = 0;
   for(int i = 0; i < LED_COUNT; i++){
-    leds.setPixelColor(i,RedMatrix[i],GreenMatrix[i],BlueMatrix[i]);
-    Serial.print(i);
-    Serial.print(").");
+    R = RedMatrix[i];
+    G = GreenMatrix[i];
+    B = BlueMatrix[i];
+    leds.setPixelColor(i,R,G,B);
+    Serial.print(i+1);
+    Serial.print(".) ");
     Serial.print("{");
-    Serial.print(RedMatrix[i]); 
+    Serial.print(R); 
     Serial.print(" , ");
-    Serial.print(GreenMatrix[i]);
+    Serial.print(G);
     Serial.print(" , ");
-    Serial.print(BlueMatrix[i]);
+    Serial.print(B);
     Serial.println("}");
+    
   }
   Serial.print("\nSe termina de configurar la matriz");
   leds.show();
 }
-
-void mostrarBandera(){
-  for(int i = 0; i < LED_COUNT; i++){
-    leds.setPixelColor(i,RedMatrix[i],GreenMatrix[i],BlueMatrix[i]);
-    Serial.print(i);
-    Serial.print(").");
-    Serial.print("{");
-    Serial.print(RedMatrix[i]); 
-    Serial.print(" , ");
-    Serial.print(GreenMatrix[i]);
-    Serial.print(" , ");
-    Serial.print(BlueMatrix[i]);
-    Serial.println("}");
+void mostrarBandera2D(){
+  uint8_t R = 0;
+  uint8_t G = 0;
+  uint8_t B = 0;
+  int cont = 1;
+  for(int i = 0; i < 16; i++){
+    for(int j = 0; j < 16; j++){
+      R = RedMatrix2D[i][j];
+      G = GreenMatrix2D[i][j];
+      B = BlueMatrix2D[i][j];
+      leds.setPixelColor(i,R,G,B);
+      Serial.print(cont);
+      Serial.print(".) ");
+      Serial.print("{");
+      Serial.print(R); 
+      Serial.print(" , ");
+      Serial.print(G);
+      Serial.print(" , ");
+      Serial.print(B);
+      Serial.println("}");
+      cont += 1;
+    } 
   }
   Serial.print("\nSe termina de configurar la matriz");
   leds.show();
 }
 
 void cleanMatrix(){
+  Serial.print("\nLimpiando Matriz");
   for(int i = 0; i < LED_COUNT; i++){
     leds.setPixelColor(i,0,0,0);    
   }
   leds.show(); 
+  Serial.print("\nMatriz limpia");
 }
