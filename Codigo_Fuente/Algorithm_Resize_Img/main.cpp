@@ -3,6 +3,7 @@
 
 #include <imageresize.h>
 
+
 using namespace std;
 
 int main()
