@@ -11,8 +11,12 @@ class ImageResize
 {
 public:
     ImageResize();
-    ImageResize(int _wLeds, int _hLeds, string _fileName);
+    ImageResize(int _wLeds, int _hLeds, string _fileNameImg, string _fileNameTxt);
     void SaveImgTxt();
+
+    // [ SUBMUESTREO ]
+    void subDivisionExact();
+    void subNoDivisionExact();
 
     void categorizeAlgorithm();
     void Sobremuestreo();
@@ -21,7 +25,8 @@ private:
 
     int mWidthL;
     int mHeightL;
-    string mFileName;
+    string mFileNameImg;
+    string mFileNameTxt;
     QImage *IMG; // Maverick del futuro, no se le olvide eliminar lo del heap -> delete[];
 
     int **mImgRed;
