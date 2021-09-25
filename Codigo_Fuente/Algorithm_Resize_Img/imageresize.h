@@ -17,12 +17,10 @@ public:
     void categorizeAlgorithm();
     void Sobremuestreo();
 
-
-
 private:
 
-    float mWidthL;
-    float mHeightL;
+    int mWidthL;
+    int mHeightL;
     string mFileName;
     QImage *IMG; // Maverick del futuro, no se le olvide eliminar lo del heap -> delete[];
 

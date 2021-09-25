@@ -4,13 +4,16 @@ ImageResize::ImageResize(){}
 
 ImageResize::ImageResize(int _wLeds, int _hLeds, string _fileName)
 {
-    mWidthL = float(_wLeds);
-    mHeightL = float(_hLeds);
+    // [ Inicializacion atributos básicos ]
+
+    mWidthL = _wLeds;
+    mHeightL = _hLeds;
     mFileName = _fileName;
 
     IMG = new QImage("../Algorithm_Resize_Img/Images/img.jpg");
 
     // [ Inicializacion dinamica de matrices que contendrán los datos de la img redimensionada ]
+
     mImgRed = new int *[mHeightL];
     mImgGreen = new int *[mHeightL];
     mImgBlue = new int *[mHeightL];
@@ -21,14 +24,37 @@ ImageResize::ImageResize(int _wLeds, int _hLeds, string _fileName)
     }
 }
 
-
 void ImageResize::categorizeAlgorithm()
 {
-    float width = IMG->width();
-    float height = IMG->height();
+    int width = IMG->width();
+    int height = IMG->height();
 
-    float categW = width / mWidthL;
-    float categH = height / mHeightL;
+//    float categW = width / mWidthL;
+//    float categH = height / mHeightL;
+
+    if ((width >= mWidthL) && (height >= mHeightL)) {
+        // En este caso se realiza submuestreo
+
+        if ((width % mWidthL == 0) && (height % mHeightL == 0)) {
+            // En este caso no se consideran pixeles sobrantes
+        }else {
+            // Sí se consideran pixeles sobrantes
+        }
+    }else if ((width <= mWidthL) && (height <= mWidthL)) {
+        // En este se hace sobremuestreo
+
+        if ((mWidthL % width == 0) && (mHeightL % height == 0)) {
+            // En este caso no se consideran pixeles faltantes
+        }else {
+            // Sí se consideran pixeles faltantes
+        }
+    }else if ((width >= mWidthL) && (height <= mHeightL)) {
+        // En este caso se hace submuestreo sobre el ancho,
+        // y sobremuestreo sobre el alto
+    }else if((width <= mWidthL) && (height >= mHeightL)) {
+        // En este caso de hace sobremuestreo sobre el ancho,
+        // y submuestreo sobre el alto
+    }
 
 
 }
