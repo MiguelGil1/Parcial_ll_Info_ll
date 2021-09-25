@@ -1,0 +1,212 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{listings}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{cite}
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+            
+        \Huge
+        \textbf{Informe de Implementación - Informatica II.}
+            
+        \vspace{0.5cm}
+        \LARGE
+            
+        \vspace{1.5cm}
+            
+        \textbf{Luis Miguel Gil Rodriguez.}
+        \\
+        \textbf{Maverick Sossa Tobon.}
+        \vfill
+        \vspace{0.8cm}
+            
+        \Large
+        Despartamento de Ingeniería Electrónica y Telecomunicaciones\\
+        Universidad de Antioquia\\
+        Medellín\\
+        Septiembre de 2021
+            
+    \end{center}
+\end{titlepage}
+\tableofcontents
+\newpage
+\section{Sección introductoria} \label{intro}
+En este documento, podremos encontrar las ideas para abordar el parcial numero dos del curso Informatica II. Encontraremos en el detalles tales como el lgoritmo de redimensionamiento de imagenes para luego se mostrados en una martriz de LEDs de un tamaño ce 16 por 16 LEDs.
+
+\section{Circuito.} \label{circuito}
+Para la implementación del circuito en la plataforma Tinkercad, primeramente se comenzaron a realizar ensayos con una tira de 16 Neopixeles, la cual se conecta de la siguiente manera:
+\begin{enumerate}
+  \item La primera fila se conecta al puerto 2 del Arduino.
+  \item Se le suministra potencia de 5 Voltios a la tira de Neopixel procedentes del Arduino.
+  \item Se conecta el polo a tierra procedente del Arduino a la tira del Neopixel.
+\end{enumerate}
+\begin{figure}[h]
+  \includegraphics[width=10cm]{figura_1.png}
+  \centering
+  \caption{Prender fila numero uno de la matriz.}
+  \label{fig:fila_uno}
+\end{figure}
+Se comenzó la etapa de pruebas con la tira de Neopixel, ejemplo de algunas pruebas que se realizaron:
+\begin{enumerate}
+    \item Cómo prender un Neopixel en específico.
+    \item Cómo mostrar un patrón en una tira (ejemplo: Solo prender las posiciones impares, solo prender las posiciones pares).
+    \item Cómo prender todos los leds e a la vez.
+\end{enumerate}
+Una vez superada esta etapa de prueba se agregaron las 15 filas restantes, para obtener una especie de matriz de 16 X 16, en primer lugar se realiza la conexión desde la fila uno hasta la fila cinco de la siguiente manera:
+\begin{enumerate}
+    \item Se conecta entrada de la fila N con la entrada de la fila N+1.
+    \item Se conecta la potencia de la fila N con la potencia de la fila N+1.
+    \item Se conecta la tierra de la fila N con la tierra de la fila N+1.
+\end{enumerate}
+Al intentar interactuar con la matriz, por ejemplo prender una Neopixel en específico se evidencio que tenía un comportamiento de prender por columnas, conducta para nada esperada.\\
+\begin{figure}[h]
+  \includegraphics[width=10cm]{figura_2.png}
+  \centering
+  \caption{Comportamiento no esperado.}
+  \label{fig:por_columnas}
+\end{figure}
+Al evidenciar este comportamiento, de inmediato se repiensa la manera de como realizar satisfactoriamente la conexión. Hasta que se llego hasta la siguiente idea:
+\begin{enumerate}
+    \item Se conecta salida de la fila N con la entrada de la fila N+1.
+    \item Se conecta la potencia de la fila N con la potencia de la fila N+1.
+    \item Se conecta la tierra de la fila N con la tierra de la fila N+1.
+\end{enumerate}
+Luego de haber realizado dicha conexión, se comenzó una nueva etapa de pruebas con el mismo, se intento prender todas las filas conectas, un Neopixel en específico y por último un patrón sencillo, como prender solo las posiciones impares, la diagonal principal de la matriz entre otras pruebas.
+
+\includegraphics[width=8cm]{figura_3.png}
+  
+A continuacion se mostrara el circuito desarrollado, cabe mencionar, que el aspecto que aqui se muestra no sera el definiticvo, pues se reorganizaran las tiras de Neopixel de una manera mas estetica.
+
+\includegraphics[width=8cm]{figura_4.png}
+
+\begin{enumerate}
+    \item Los cables de color verde se encargan de llevar los datos a la matriz de LEDs
+    \item Los cables de color Negro representan el Polo a Tierra.
+    \item Los cables de color Rojo representan la potencia (5.0 V).
+    \item Se conecta un suministro de energia, el cual alimentara la matriz de LEDs, es decir suministrara potencia a partir de la fila 9 de nuestra matriz. Este mismo alimentará con 5.0 Voltios a la matriz de LEDs.
+\end{enumerate}
+\section{Problemas presentados en la implementacion.} \label{problemas}
+\subsection{Con respecto al Circuito.}
+Realmente, se tuvo mucho menos inconvenientes en el montaje de este circuito a comparación del Parcial pasado, hemos evidenciado que hemos crecido potencialmente en este ámbito.
+El único problema que se tuvo, y ya se mencionó, fue el haber realizado la conexión de la siguiente manera: 
+\begin{enumerate}
+    \item Se conecta entrada de la fila N con la entrada de la fila N+1.
+    \item Se conecta la potencia de la fila N con la potencia de la fila N+1.
+    \item Se conecta la tierra de la fila N con la tierra de la fila N+1.
+\end{enumerate}
+Al momento de realizar pruebas con el circuito nos dimos cuenta de esto por ende, mas temprano que tarde se llegó a una solución definitiva, que fue realizar la conexión de la siguiente manera:
+\begin{enumerate}
+    \item Conectar salida de la fila N con la entrada de la fila N+1.
+    \item Se conecta la potencia de la fila N con la potencia de la fila N+1.
+    \item Se conecta la tierra de la fila N con la tierra de la fila N+1.
+\end{enumerate}
+Después de esto, no se volvió a tener mas inconvenientes en el proceso de montado del circuito.
+
+
+\subsection{Con respecto al código de Tinkercad.}
+
+Desde que se comenzó a montar el circuito, se viene realizando pruebas con la conexión, todas las pruebas fueron satisfactorias, se realizaron pruebas tales como:
+\begin{enumerate}
+    \item Prender toda la matriz.
+    \item Prender las filas impares.
+    \item Prender las filas pares.
+    \item Prender la diagonal principal de la matriz.
+\end{enumerate}
+La única prueba que fallo fue al momento de pasarle la intensidad de cada color RGB por medio de:
+\begin{enumerate}
+    \item Matriz unidimensional.
+    \item Matriz bidimensional.
+\end{enumerate}
+Mostraremos un ejemplo de como se estaban creando las matrices de la intensidad del color Rojo, tanto bidimensional como unidimensionalmente:
+\begin{lstlisting}[language=C++, label=codigo_matrices_int]
+int RedMatrix2D [16][16]= {
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20}
+};
+int RedMatrix [256]= {
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20
+};
+\end{lstlisting}
+Al iniciar simulación con estas matrices de tipo entero, se evidencio que todo funcionaba perfectamente hasta la hora de que llegaba a la siguiente instrucción:
+\begin{lstlisting}[language=C++, label=show]
+Leds.show();
+\end{lstlisting}
+Alli, la matriz no prendia, por ende se comenzó a investigar acerca de la función setPixelColor() de la librería de Neopixel, y nos dimos cuenta que los paramentos de intensidad de cada color (RGB) debía ser del tipo de dato uint8-t, por ende, se cambia el tipo de dato de las matrices de int a uint8-t y funciona correctamente.
+Las matrices quedan de la siguiente manera:
+\begin{lstlisting}[language=C++, label=codigo_matrices_uint]
+uint8_t RedMatrix2D [16][16]= {
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20},
+  {20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20}
+};
+uint8_t RedMatrix [256]= {
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+  20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20
+};
+\end{lstlisting}
+\subsection{Con respecto a Qt.}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+\end{document}
