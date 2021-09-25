@@ -1,6 +1,9 @@
 #include <iostream>
 #include <QImage>
 
+#include <imageresize.h>
+
+
 using namespace std;
 
 int main()
