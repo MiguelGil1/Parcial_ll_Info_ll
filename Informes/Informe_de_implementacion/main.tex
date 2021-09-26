@@ -207,6 +207,28 @@ uint8_t RedMatrix [256]= {
 };
 \end{lstlisting}
 \subsection{Con respecto a Qt.}
+El primer problema con el que nos encontramos a la hora de la implementación, lo evidenciamos al momento de aplicarle el algoritmo de submuestreo a la siguiente imagen:
+\begin{figure}[h]
+  \includegraphics[width=10cm]{bandera_con_problemas.jpg}
+  \centering
+  \caption{Bandera que presentaba problemas.}
+  \label{fig:guia}
+\end{figure}
+Resulta que la imagen tiene varios pixeles con las siguientes intensidades de color:
+\begin{enumerate}
+    \item Red = 255
+    \item Green = 255
+    \item Blue = 255
+\end{enumerate}
+Y al intentarlo mostrar en la matriz de LEDs tenia un comportamiento bastante extraño, por lo que se recordó lo dicho en la asignación del parcial y redujimos en 1 unidad cada intensidad si resultaba ser [255,255,255]
+Luego de aplicar dicho cambio al algoritmo, se pudo mostrar de forma satisfactoria la imagen:
+\begin{figure}[h]
+  \includegraphics[width=10cm]{bandera_en_matriz.jpeg}
+  \centering
+  \caption{Bandera en la matriz.}
+  \label{fig:guia}
+\end{figure}
+
 \subsection{Con respecto a Git y Github.}
 Nos vimos fuertemente afectados en cuanto a la coordinación en el repositorio, pues el realizar las cosas en un orden poco adecuado o utilizando comandos incorrectos, trajo como consecuencia que no se pudieran hacer commits, o se realizara un merge “raro” entre una rama y otra.
 \\
