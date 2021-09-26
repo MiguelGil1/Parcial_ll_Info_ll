@@ -3,6 +3,7 @@
 \usepackage[spanish]{babel}
 \usepackage{listings}
 \usepackage{graphicx}
+\usepackage{hyperref}
 \graphicspath{ {images/} }
 \usepackage{cite}
 
@@ -51,6 +52,31 @@ En este corto pero eficiente manual de usuario podrás aprender cómo utilizar n
   \label{fig:Colombia}
 \end{figure}
 \subsection{En Qt.}
+Cuando tenga descargado o clonado en su computador el repositorio \url{https://github.com/MiguelGil1/Parcial_ll_Info_ll}, deberá ir a la carpeta Codigo-fuente y luego a la carpeta del proyecto de Qt, el cual se llama Algorithm-Resize-Img y darle doble click al archivo Algorithm-Resize-Img.pro.
+\begin{figure}[h]
+  \includegraphics[width=10cm]{explorador_archivos.PNG}
+  \centering
+  \caption{Explorador de archivos}
+  \label{fig:explorador_archivos}
+\end{figure}
+Al hacer este paso, se abrirá de inmediatamente Qt y te preguntara que con que kit desea construir el proyecto, como se muestra a continuación:
+\begin{figure}[h]
+  \includegraphics[width=10cm]{build.PNG}
+  \centering
+  \caption{Seleccion de Kit de construccion.}
+  \label{fig:build}
+\end{figure}
+Selecciona el de kit de confianza y presionas el botón “Configure Project”:
+\\
+\includegraphics[width=10cm]{configurar_proyecto.PNG}
+\\
+Cuando el proyecto termine de cargar y configurar, presione el Botón “Run” para ejecutar el programa:
+\begin{figure}[h]
+  \includegraphics[width=10cm]{run.PNG}
+  \centering
+  \caption{Boton "Run".}
+  \label{fig:run}
+\end{figure}
 \subsection{En Tinkercad.}
 Luego de haber ejecutado satisfactoriamente el programa de redimensionamiento de Imágenes, iremos a la Carpeta DB, ubicada dentro del proyecto de Qt, en la cual podemos encontrar archivo de texto titulado “ImgResize.txt”, allí podremos encontrar la información de la imagen redimensionada dividida en 3 matrices unidimensionales, las cuales representara la intensidad del Rojo, Verde o Azul en números enteros de 0 a 255
 \\
