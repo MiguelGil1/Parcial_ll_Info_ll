@@ -50,15 +50,45 @@ En este corto pero eficiente manual de usuario podrás aprender cómo utilizar n
   \caption{La bandera de Australia en la matriz de LEDs.}
   \label{fig:Colombia}
 \end{figure}
+\subsection{En Qt.}
+\subsection{En Tinkercad.}
 Luego de haber ejecutado satisfactoriamente el programa de redimensionamiento de Imágenes, iremos a la Carpeta DB, ubicada dentro del proyecto de Qt, en la cual podemos encontrar archivo de texto titulado “ImgResize.txt”, allí podremos encontrar la información de la imagen redimensionada dividida en 3 matrices unidimensionales, las cuales representara la intensidad del Rojo, Verde o Azul en números enteros de 0 a 255
 \\
-Después de esto, procedemos a abrir el proyecto de Tinkercad, presionaremos el Botón “Código”, ubicado en la parte superior derecha de la pagina y pegaremos la información del archivo “ImgResize.txt” en la línea numero 19, de lo contrario el programa no funcionara de forma correcta.
-\\
-\\
+Después de esto, procedemos a abrir el proyecto de Tinkercad, presionaremos el Botón “Código”, ubicado en la parte superior derecha de la pagina.
+\begin{figure}[h]
+  \includegraphics[width=10cm]{codigo.PNG}
+  \centering
+  \caption{Boton "Código".}
+  \label{fig:Codigo}
+\end{figure}
+Procederemos a pegar la información del archivo “ImgResize.txt” en la línea número 19, de lo contrario el programa no funcionara de forma correcta, como e muestra en la siguiente imagen:
+\begin{figure}[h]
+  \includegraphics[width=10cm]{matrices.PNG}
+  \centering
+  \caption{Matrices del archivo en el Código.}
+  \label{fig:matrices}
+\end{figure}
 Luego de esto, podemos presionar en el botón “Iniciar simulación”, el cual se encuentra al lado derecho del botón “Código”.
+\begin{figure}[h]
+  \includegraphics[width=10cm]{iniciar_simulacion.PNG}
+  \centering
+  \caption{Botón "Iniciar simulación".}
+  \label{fig:iniciar_simulacion}
+\end{figure}
 Si desea evidenciar el valor que se le esta asignando a cada Píxel, puede dar un click en el Monitor Serial de Tinkercad, el cual se encuentra en la parte inferior del Código.
-Debe esperar hasta que el software envíe la información a cada LED de la matriz, una vez este proceso termine, inmediatamente se vera reflejado el resultado en la matriz. 
-
+\begin{figure}[h]
+  \includegraphics[width=10cm]{monitor_serial.PNG}
+  \centering
+  \caption{Monitor serial.}
+  \label{fig:monitor_serial}
+\end{figure}
+Debe esperar hasta que el software envíe la información a cada LED de la matriz, una vez este proceso termine, inmediatamente se verá reflejado el resultado en la matriz como se muestra a continuación:
+\begin{figure}[h]
+  \includegraphics[width=10cm]{resultado.PNG}
+  \centering
+  \caption{Resultado (Bandera de Brasil).}
+  \label{fig:Resultado}
+\end{figure}
 \bibliographystyle{IEEEtran}
 \bibliography{references}
 \end{document}
