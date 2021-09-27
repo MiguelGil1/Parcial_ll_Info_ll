@@ -11,6 +11,7 @@ class ImageResize
 {
 public:
     ImageResize();
+    ~ImageResize();
     ImageResize(int _wLeds, int _hLeds, string _fileNameImg, string _fileNameTxt);
     void SaveImgTxt();
 
