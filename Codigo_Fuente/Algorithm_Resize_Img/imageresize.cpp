@@ -97,15 +97,22 @@ void ImageResize::subNoDivisionExact()
     int pixResColum = width % mWidthL;
     int pixResRow = height % mHeightL;
 
+    // 300x210
+    // 300 -> 18.75, sobran 12.
+    // 210 -> 13.125, sobran 2
     int contPixR = 0; // Cantidad de pixeles a correr en la filas (row)
     int contPixC = 0; // Cantidad de pixeles a correr en las columanas (column)
     for (int i = 0; i < mHeightL; i++ ) {
+        if ((mHeightL - pixResRow) <= i) {
+            ++contPixR;
+        }
         for (int j = 0; j < mWidthL; j++) {
             // Caso en que se corren los pixeles en la filas(row) y columnas(Colum) a la vez
             if ((mHeightL - pixResRow) <= i  && (mWidthL - pixResColum) <= j) { // 16 - 4
-                mImgRed[i][j] = IMG->pixelColor(j*pixelsColum + ++contPixC, i*pixelsRow + ++contPixR).red();
-                mImgGreen[i][j] = IMG->pixelColor(j*pixelsColum + ++contPixC, i*pixelsRow + ++contPixR).green();
-                mImgBlue[i][j] = IMG->pixelColor(j*pixelsColum + ++contPixC, i*pixelsRow + ++contPixR).blue();
+                ++contPixC;
+                mImgRed[i][j] = IMG->pixelColor(j*pixelsColum + contPixC, i*pixelsRow + contPixR).red();
+                mImgGreen[i][j] = IMG->pixelColor(j*pixelsColum + contPixC, i*pixelsRow + contPixR).green();
+                mImgBlue[i][j] = IMG->pixelColor(j*pixelsColum + contPixC, i*pixelsRow + contPixR).blue();
             }// Caso en que no se corren ni en la filas(row) y columnas(Colum)
             else if ((mHeightL - pixResRow) > i  && (mWidthL - pixResColum) > j){
                 mImgRed[i][j] = IMG->pixelColor(j*pixelsColum, i*pixelsRow).red();
@@ -113,16 +120,18 @@ void ImageResize::subNoDivisionExact()
                 mImgBlue[i][j] = IMG->pixelColor(j*pixelsColum, i*pixelsRow).blue();
             }// Caso en que solo se corren en las fillas(row)
             else if ((mHeightL - pixResRow) <= i) {
-                mImgRed[i][j] = IMG->pixelColor(j*pixelsColum, i*pixelsRow + ++contPixR).red();
-                mImgGreen[i][j] = IMG->pixelColor(j*pixelsColum, i*pixelsRow + ++contPixR).green();
-                mImgBlue[i][j] = IMG->pixelColor(j*pixelsColum, i*pixelsRow + ++contPixR).blue();
+                mImgRed[i][j] = IMG->pixelColor(j*pixelsColum, i*pixelsRow + contPixR).red();
+                mImgGreen[i][j] = IMG->pixelColor(j*pixelsColum, i*pixelsRow + contPixR).green();
+                mImgBlue[i][j] = IMG->pixelColor(j*pixelsColum, i*pixelsRow + contPixR).blue();
             }// Caso en solo se corren en las columnas(column)
             else {
-                mImgRed[i][j] = IMG->pixelColor(j*pixelsColum + ++contPixC, i*pixelsRow).red();
-                mImgGreen[i][j] = IMG->pixelColor(j*pixelsColum + ++contPixC, i*pixelsRow).green();
-                mImgBlue[i][j] = IMG->pixelColor(j*pixelsColum + ++contPixC, i*pixelsRow).blue();
+                ++contPixC;
+                mImgRed[i][j] = IMG->pixelColor(j*pixelsColum + contPixC, i*pixelsRow).red();
+                mImgGreen[i][j] = IMG->pixelColor(j*pixelsColum + contPixC, i*pixelsRow).green();
+                mImgBlue[i][j] = IMG->pixelColor(j*pixelsColum + contPixC, i*pixelsRow).blue();
             }
         }
+        contPixC = 0;
     }
 
 }
@@ -198,5 +207,20 @@ void ImageResize::SaveImgTxt()
     archImg << "}; \n\n";
 
     archImg.close();
+
+}
+
+
+ImageResize::~ImageResize()
+{
+    for (int i = 0; i < mHeightL; i++) {
+        delete [] mImgRed[i];
+        delete [] mImgGreen[i];
+        delete [] mImgBlue[i];
+    }
+    delete [] mImgRed;
+    delete [] mImgGreen;
+    delete [] mImgBlue;
+
 
 }
