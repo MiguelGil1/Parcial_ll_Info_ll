@@ -5,6 +5,7 @@ CONFIG -= app_bundle
 
 SOURCES += \
         imageresize.cpp \
+        img_rsz_functs.cpp \
         main.cpp
 
 HEADERS += \

@@ -10,7 +10,7 @@ using namespace std;
 class ImageResize
 {
 public:
-    ImageResize();
+    // ImageResize();
     ~ImageResize();
     ImageResize(int _wLeds, int _hLeds, string _fileNameImg, string _fileNameTxt);
     void SaveImgTxt();
@@ -18,6 +18,10 @@ public:
     // [ SUBMUESTREO ]
     void subDivisionExact();
     void subNoDivisionExact();
+
+    // [ SOBREMUESTREO ]
+    void sobreDivisionExact();
+    void sobreNoDivisionExact();
 
     void categorizeAlgorithm();
     void Sobremuestreo();
