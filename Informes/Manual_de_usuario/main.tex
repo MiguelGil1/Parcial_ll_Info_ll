@@ -70,7 +70,18 @@ Selecciona el de kit de confianza y presionas el botón “Configure Project”:
 \\
 \includegraphics[width=10cm]{configurar_proyecto.PNG}
 \\
-Cuando el proyecto termine de cargar y configurar, presione el Botón “Run” para ejecutar el programa:
+Ya que tenemos el proyecto completamente cargado en Qt, asegúrese que la imagen a la que usted desea aplicarle el algoritmo de redimensionamiento se encuenre en la siguiente ruta relativa:
+\begin{lstlisting}[language=C++, label=codigo_matrices_int]
+../Algorithm_Resize_Img/BD/<nombre_de_la_imagen>
+\end{lstlisting}
+A continuación se mostrará como debe aparecer:
+\begin{figure}[h]
+  \includegraphics[width=10cm]{carpetaBD.PNG}
+  \centering
+  \caption{Direccion relativa.}
+  \label{fig:carpetaBD}
+\end{figure}
+Luego de esto, puede presionar el Botón “Run” para ejecutar el programa:
 \begin{figure}[h]
   \includegraphics[width=10cm]{run.PNG}
   \centering
