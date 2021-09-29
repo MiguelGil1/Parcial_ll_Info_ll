@@ -64,8 +64,6 @@ ImageResize::ImageResize(int _wLeds, int _hLeds, string _fileNameImg, string _fi
     }
 }
 
-
-
 void ImageResize::SaveImgTxt()
 {
     // El método realiza el proceso de guardado de la imagen redimensionda en un archivo txt
@@ -140,8 +138,6 @@ void ImageResize::SaveImgTxt()
     archImg.close();
 
 }
-
-
 
 ImageResize::~ImageResize()
 {

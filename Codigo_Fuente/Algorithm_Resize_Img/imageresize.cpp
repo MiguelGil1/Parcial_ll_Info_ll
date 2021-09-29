@@ -1,7 +1,10 @@
 #include "imageresize.h"
 
-// ImageResize::ImageResize(){}
-
+// Se habla varias veces de "divisionExact".
+// Se refiere a que: en submuestreo, la division entre
+// el tamano de la imagen y el de matriz es o no exacta;
+// y el sobremuestreo se refiere a que la division entre
+// el tamano de la matriz y el de la imagen es o no exacta.
 
 /// [ METODOS DE SUBMUESTREO ]
 
@@ -10,7 +13,7 @@ void ImageResize::subDivisionExact()
     int width = IMG->width();
     int height = IMG->height();
 
-
+    // Indican el tamaño del salto
     int pixelsColum = width/mWidthL;
     int pixelsRow = height/mHeightL;
 
@@ -32,7 +35,7 @@ void ImageResize::subNoDivisionExact()
     // posiblemente importante. Esta cantidad de pixeles que restan se obtienen con las variables:
     // pixResColum, pixResRow.
     // Entonces la forma de considerar estos pixeles restantes con que, cada vez que se coje un
-    // pixel dando su posicion, sumamos uno a la coordenada x o y, dependiendo del caso.
+    // pixel danda su posicion, sumamos uno a la coordenada x o y, dependiendo del caso.
 
     int pixelsColum = width/mWidthL;
     int pixelsRow = height/mHeightL;
@@ -41,9 +44,6 @@ void ImageResize::subNoDivisionExact()
     int pixResColum = width % mWidthL;
     int pixResRow = height % mHeightL;
 
-    // 300x210
-    // 300 -> 18.75, sobran 12.
-    // 210 -> 13.125, sobran 2
     int contPixR = 0; // Cantidad de pixeles a correr en la filas (row)
     int contPixC = 0; // Cantidad de pixeles a correr en las columanas (column)
     for (int i = 0; i < mHeightL; i++ ) {
@@ -77,15 +77,16 @@ void ImageResize::subNoDivisionExact()
         }
         contPixC = 0;
     }
-
 }
 
-/// [ METODOS DE SOBREMUESTREO
+/// [ METODOS DE SOBREMUESTREO ]
+
 void ImageResize::sobreDivisionExact()
 {
     int width = IMG->width();
     int height = IMG->height();
 
+    // Indican la cantidad de veces a replicar un pixel, ya sea de columna o fila
     int pixelsColum = mWidthL/width;
     int pixelsRow = mHeightL/height;
 
