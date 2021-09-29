@@ -39,6 +39,440 @@
 \section{Sección introductoria} \label{intro}
 En este documento, podremos encontrar las ideas para abordar el parcial numero dos del curso Informatica II. Encontraremos en el detalles tales como el lgoritmo de redimensionamiento de imagenes para luego se mostrados en una martriz de LEDs de un tamaño ce 16 por 16 LEDs.
 
+\section{Clases implementadas} \label{clases implementadas}
+Se diseña una clase que, a partir de unos datos inciales y unos métodos, cumple el objetivo de redimensionar una imagen al tamaño de una matriz de leds. 
+Un archivo de cabecera, en c++, por lo general contiene la definición de los miembros públicos, privados o protegidos de detarminada clase. Son utilidad visual se basa en que proporcionan una idea general de aquello que constituye tal clase. Entonces, para dar ilustración del programa, se desea mostrarlo. 
+
+\begin{lstlisting}[language=C++, label=codigo_matrices_int]
+
+
+#include <iostream>
+#include <QImage>
+#include <fstream>
+
+using namespace std;
+
+class ImageResize
+{
+public:
+    // Destructor. Es necesario dada la existencia de ciertos
+    // atributos creados en el heap
+    ~ImageResize();
+    
+    // Constructor con parametros. Los necesario para el completo 
+    // funcionamiento del programa
+    ImageResize(int _wLeds, int _hLeds, string _fileNameImg, 
+    string _fileNameTxt);
+
+    // [ SUBMUESTREO ]
+    // Submuestreo en donde la division es exacta
+    void subDivisionExact();
+    // Submuestreo en donde la division no es exacta
+    void subNoDivisionExact();
+
+    // [ SOBREMUESTREO ]
+    // Analogo a submuestreo
+    void sobreDivisionExact();
+    void sobreNoDivisionExact();
+    
+    // A partir de las dimensiones de la matriz de leds
+    // y la imagen, determina que metodo, entre los de 
+    // submuestreo y sobremuestreo, se debe ejecutar para 
+    // la correcta redimension de la imagen
+    void categorizeAlgorithm();
+    
+    // Una vez realizado el proceso de redimension, se 
+    // ejecuta para guardar la informacion en un .txt
+    void SaveImgTxt();
+    
+private:
+
+    int mWidthL; // Ancho de matriz de leds
+    int mHeightL; // Alto/largo de matriz de leds
+    
+    // Ruta y nombre de la imagen
+    string mFileNameImg; 
+    
+    // Nombre y ruta del archivo .txt
+    string mFileNameTxt;
+    
+    // Objeto que contiene la informacion de la imagen
+    // Se inicializa en el constructor
+    QImage *IMG; 
+
+    /// [ MATRICES DE CADA COLOR]
+    // Contendran la informacion de la imagen de cada 
+    // color. Estan en el heap.
+    // Se incializan en el constructor.
+    int **mImgRed;
+    int **mImgGreen;
+    int **mImgBlue;
+};
+
+\end{lstlisting}
+\section{Esquema de las clases implementadas} \label{esquema}
+En la ejecución del programa, hay un flujo ordenado de datos y tareas que permiten cumplir un objetivo: redimensionar una imagen. Notar tal flujo en una representación gráfica significará, realmente, obtener una idea general del funcionamiento del programa.
+Por tanto, se hace efectivo la realización de un diagrama ilustrativo. 
+\begin{figure}[h]
+  \includegraphics[width=10cm]{Esquema_Parcial_II.png}
+  \centering
+  \caption{Representación gráfica}
+  \label{fig:diagrama_ilustracion}
+\end{figure}
+
+\section{Módulos de código implemetado} \label{módulos de código}
+Ciertamente el orden es algo a considerar en la programación, y aún más cuando los programas son grandes, de miles y miles de lineas de código. En estos casos resulta práctico usar la programación modular. No solo se dentrá menos cargado un archivo, sino que también, al distribuir efectivamente el código, se podrá tener un acceso y una vista más rápida y cómoda al código por el ordenamiento usado. 
+
+
+
+\begin{lstlisting}[language=C++, label=codigo_matrices_int]
+
+/// [ PRIMER MODULO ]
+
+// modulo: imageresize.cpp
+// Metodos relacionados directamente con el 
+// proceso de redimension de la imagen
+#include "imageresize.h"
+
+// Se habla varias veces de "divisionExact". 
+// Se refiere a que: en submuestreo, la division entre 
+// el tamano de la imagen y el de matriz es o no exacta; 
+// y el sobremuestreo se refiere a que la division entre
+// el tamano de la matriz y el de la imagen es o no exacta.
+
+/// [ METODOS DE SUBMUESTREO ]
+
+void ImageResize::subDivisionExact()
+{
+    // Dimensiones de la imagen
+    int width = IMG->width();
+    int height = IMG->height();
+    
+    // Tamano del salto en las columas 
+    // y en las filas
+    int pixelsColum = width/mWidthL;
+    int pixelsRow = height/mHeightL;
+
+    for (int i = 0; i < mHeightL ; i++) {
+        for (int j = 0; j < mWidthL; j++) {
+            // Asignacion de los colores a cada matriz
+            // Con saltos sobre la imagen de la forma: 
+            // j*pixelsColum; i*pixelsRow
+            
+        }
+    }
+}
+
+void ImageResize::subNoDivisionExact()
+{
+    int width = IMG->width();
+    int height = IMG->height();
+    // La idea de este caso es el siguiente:
+    // Como la division no es exacta, si no se consideran los pixeles
+    // restantes se pierde informacion posiblemente importante.
+    //  Esta cantidad de pixeles que restan se obtienen con las 
+    // variables: pixResColum, pixResRow.
+    // Entonces la forma de considerar estos pixeles restantes con
+    // que, cada vez que se coje un pixel dando su posicion,
+    // sumamos uno a la coordenada x o y, dependiendo del caso.
+
+    int pixelsColum = width/mWidthL;
+    int pixelsRow = height/mHeightL;
+
+    // Indicadores de desde donde empezar a considerar los pixeles
+    // restantes
+    int pixResColum = width % mWidthL;
+    int pixResRow = height % mHeightL;
+
+    // Cantidad de pixeles a correr en la filas (row)
+    int contPixR = 0; 
+    
+    // Cantidad de pixeles a correr en las columanas (column)
+    int contPixC = 0; 
+    
+    for (int i = 0; i < mHeightL; i++ ) {
+        if ((mHeightL - pixResRow) <= i) {
+            ++contPixR;
+        }
+        for (int j = 0; j < mWidthL; j++) {
+            // Caso en que se corren los pixeles en la filas(row) y
+            // columnas(Colum) a la vez
+            if ((mHeightL - pixResRow) <= i  && (mWidthL 
+            - pixResColum) <= j) {
+                ++contPixC;
+                // Asignacion de los colores a cada matriz
+                
+            }// Caso en que no se corren ni en la filas(row) y 
+            // columnas(Colum)
+            else if ((mHeightL - pixResRow) > i  && (mWidthL 
+            - pixResColum) > j){
+                // Asignacion de los colores a cada matriz
+                
+            }// Caso en que solo se corren en las fillas(row)
+            else if ((mHeightL - pixResRow) <= i) {
+                // Asignacion de los colores a cada matriz
+                
+            }// Caso en solo se corren en las columnas(column)
+            else {
+                ++contPixC;
+                // Asignacion de los colores a cada matriz
+            }
+        }
+        contPixC = 0;
+    }
+
+}
+
+/// [ METODOS DE SOBREMUESTREO ]
+
+void ImageResize::sobreDivisionExact()
+{
+    int width = IMG->width();
+    int height = IMG->height();
+
+    int pixelsColum = mWidthL/width;
+    int pixelsRow = mHeightL/height;
+
+    int red;
+    int green;
+    int blue;
+
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            // Se coge el color a replicar
+            
+            // En la matriz de leds, se pone repetitivamene tal color
+            for (int iCopy = 0; iCopy < pixelsRow; iCopy++) {
+                for (int jCopy = 0; jCopy < pixelsColum; jCopy++) {
+                    // Asignacion de los colores a cada matriz
+                }
+            }
+        }
+    }
+}
+
+void ImageResize::sobreNoDivisionExact()
+{
+    int width = IMG->width();
+    int height = IMG->height();
+
+    // Indican la cantidad de veces a replicar un pixel, ya sea de
+    // columna o fila
+    int pixelsColum = mWidthL/width;
+    int pixelsRow = mHeightL/height;
+
+    // Indican la cantidad de pixels faltantes para completar la 
+    // matriz de leds
+    int pixResColum = mWidthL % width;
+    int pixResRow = mHeightL % height;
+
+    // Contadores auxuliares para el relleno de pixeles en 
+    // filas y columnas
+    // Se inicializan en -1 porque en caso contrario
+    // indexan la matriz en posiciones invlidas
+    int contPixR = -1;
+    int contPixC = -1;
+
+    int red;
+    int green;
+    int blue;
+
+    for (int i = 0; i < height; i++) {
+        if ((height - pixResRow) <= i) {
+            contPixR++;
+        }
+
+        for (int j = 0; j < width; j++) {
+            red = IMG->pixelColor(j, i).red();
+            green = IMG->pixelColor(j, i).green();
+            blue = IMG->pixelColor(j, i).blue();
+
+            // Caso en que rellenan con pixeles en la
+            // filas(row) y las columnas(colum)
+            if ((height - pixResRow) <= i  && (width - 
+            pixResColum) <= j) {
+                contPixC++;
+                for (int iCopy = 0; iCopy < pixelsRow + 1; iCopy++) {
+                    for (int jCopy = 0; jCopy < pixelsColum + 1;
+                     jCopy++) {
+                        // Asignacion de los colores a cada matriz
+                    }
+                }
+            }// Caso en que no se rellenan con 
+            // pixeles ni en las filas(row) ni en 
+            // las columnas(colum)
+            else if ((height - pixResRow) > i && (width 
+            - pixResColum) > j) {
+                for (int iCopy = 0; iCopy < pixelsRow; iCopy++) {
+                    for (int jCopy = 0; jCopy < pixelsColum; 
+                    jCopy++) {
+                        // Asignacion de los colores a cada matriz
+                    }
+                }
+            }// Caso en que se rellenan con pixeles 
+            // solo en las filas(row)
+            else if ((height - pixResRow) <= i) {
+                for (int iCopy = 0; iCopy < pixelsRow + 1; iCopy++) {
+                    for (int jCopy = 0; jCopy < pixelsColum; 
+                    jCopy++) {
+                        // Asignacion de los colores a cada matriz
+                    }
+                }
+            }// Caso en que se rellenan con pixeles 
+            // solo en las columnas(colum)
+            else {
+                contPixC++;
+                for (int iCopy = 0; iCopy < pixelsRow; iCopy++) {
+                    for (int jCopy = 0; jCopy < pixelsColum + 1;
+                     jCopy++) {
+                        // Asignacion de los colores a cada matriz
+                    }
+                }
+            }
+        }contPixC = -1;
+    }
+}
+
+/// [ SEGUNDO MODULO ]
+
+// modulo: img_rsz_functs.cpp
+// Metodos que no estan realacionados directamente  
+// con el proceso de redimension de la imagen
+#include "imageresize.h"
+
+#include "imageresize.h"
+
+/// [ FUNCIONES QUE NO INCLUYEN REDIMENSIONAMIENTO ]
+
+
+void ImageResize::categorizeAlgorithm()
+{
+    int width = IMG->width();
+    int height = IMG->height();
+
+//    float categW = width / mWidthL;
+//    float categH = height / mHeightL;
+
+    if ((width >= mWidthL) && (height >= mHeightL)) {
+        // En este caso se realiza submuestreo
+        // Ejecucion metodos de submuestreo
+        
+    }else if ((width <= mWidthL) && (height <= mWidthL)) {
+        // En este se hace sobremuestreo
+        // Ejecucion metodos de sobremuestreo
+        
+    }else if ((width >= mWidthL) && (height <= mHeightL)) {
+        // En este caso se hace submuestreo sobre el ancho,
+        // y sobremuestreo sobre el alto
+        
+    }else if((width <= mWidthL) && (height >= mHeightL)) {
+        // En este caso de hace sobremuestreo sobre el ancho,
+        // y submuestreo sobre el alto
+    }
+}
+
+
+ImageResize::ImageResize(int _wLeds, int _hLeds, 
+string _fileNameImg, string _fileNameTxt)
+{
+    // [ Inicializacion atributos basicos ]
+
+    mWidthL = _wLeds;
+    mHeightL = _hLeds;
+    mFileNameImg = _fileNameImg;
+    mFileNameTxt = _fileNameTxt;
+
+    IMG = new QImage(mFileNameImg.c_str());
+
+    // [ Inicializacion dinamica de matrices que contendran 
+    // los datos de la img redimensionada ]
+
+    mImgRed = new int *[mHeightL];
+    mImgGreen = new int *[mHeightL];
+    mImgBlue = new int *[mHeightL];
+    for (int i = 0; i < mHeightL; i++) {
+        mImgRed[i] = new int [mWidthL];
+        mImgGreen[i] = new int [mWidthL];
+        mImgBlue[i] = new int [mWidthL];
+    }
+}
+
+void ImageResize::SaveImgTxt()
+{
+    // El metodo realiza el proceso de guardado de 
+    // la imagen redimensionda en un archivo txt
+
+    ofstream archImg(mFileNameTxt);
+
+    if (!archImg.is_open()) {
+        cout << "Error al abrir archivo" << endl;
+        exit(1);
+    }
+
+    // [ Se almacena el color Red ]
+    archImg << "uint8_t RedMatrix [256] = { \n";
+    
+    for (int i = 0; i < mHeightL; i++) {
+
+        for (int j = 0; j < mWidthL; j++) {
+            // Se considera el 255 por el error de tinkerkad
+            // Se guarda en el archivo el dato de la
+            // matriz de la posicion ij
+        }
+        archImg << "\n";
+    }
+    archImg << "}; \n\n";
+
+    // [ Se almacena el color Green ]
+    archImg << "uint8_t GreenMatrix [256] = { \n";
+    for (int i = 0; i < mHeightL; i++) {
+
+        for (int j = 0; j < mWidthL; j++) {
+            // Se considera el 255 por el error de tinkerkad
+            // Se guarda en el archivo el dato de la
+            // matriz de la posicion ij
+        }
+        archImg << "\n";
+    }
+    archImg << "}; \n\n";
+
+    // [ Se almacena el color Blue ]
+    archImg << "uint8_t BlueMatrix [256] = { \n";
+    for (int i = 0; i < mHeightL; i++) {
+
+        for (int j = 0; j < mWidthL; j++) {
+            // Se considera el 255 por el error de tinkerkad
+            // Se guarda en el archivo el dato de la
+            // matriz de la posicion ij
+        }
+        archImg << "\n";
+    }
+    archImg << "}; \n\n";
+
+    archImg.close();
+
+}
+
+ImageResize::~ImageResize()
+{
+    // Destructor que elimina los arreglos dinamicos de la imagen
+
+    for (int i = 0; i < mHeightL; i++) {
+        delete [] mImgRed[i];
+        delete [] mImgGreen[i];
+        delete [] mImgBlue[i];
+    }
+    delete [] mImgRed;
+    delete [] mImgGreen;
+    delete [] mImgBlue;
+
+
+}
+
+    
+\end{lstlisting}
+
+
 \section{Circuito.} \label{circuito}
 Para la implementación del circuito en la plataforma Tinkercad, primeramente se comenzaron a realizar ensayos con una tira de 16 Neopixeles, la cual se conecta de la siguiente manera:
 \begin{enumerate}
