@@ -3,24 +3,18 @@
 
 #include <imageresize.h>
 
-using namespace std;
 
-#define PATH_TO_FILES "../Algorithm_Resize_Img/BD/"
+using namespace std;
 
 int main()
 {
 
-    string fileName = "";
-    string fileTxt = "ImgResize.txt";
+    string fileName = "../Algorithm_Resize_Img/BD/brasil10x7.jpg";
+    string fileTxt = "../Algorithm_Resize_Img/BD/ImgResize.txt";
 
-    cout << "Ingrese nombre de la imagen a redimensionar (ej: brasil.png): ";
-    cin >> fileName;
-
-    ImageResize imgR(16, 16, PATH_TO_FILES + fileName, PATH_TO_FILES + fileTxt);
+    ImageResize imgR(16, 16, fileName, fileTxt);
     imgR.categorizeAlgorithm();
     imgR.SaveImgTxt();
-
-    cout << "\nRedimension realizada correctamente" << endl;
 
     return 0;
 }
