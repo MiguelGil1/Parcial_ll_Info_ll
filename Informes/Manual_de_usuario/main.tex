@@ -53,72 +53,89 @@ En este corto pero eficiente manual de usuario podrás aprender cómo utilizar n
 \end{figure}
 \subsection{En Qt.}
 Cuando tenga descargado o clonado en su computador el repositorio \url{https://github.com/MiguelGil1/Parcial_ll_Info_ll}, deberá ir a la carpeta Codigo-fuente y luego a la carpeta del proyecto de Qt, el cual se llama Algorithm-Resize-Img y darle doble click al archivo Algorithm-Resize-Img.pro.
-\begin{figure}[h]
-  \includegraphics[width=10cm]{explorador_archivos.PNG}
-  \centering
-  \caption{Explorador de archivos}
-  \label{fig:explorador_archivos}
-\end{figure}
-Al hacer este paso, se abrirá de inmediatamente Qt y te preguntara que con que kit desea construir el proyecto, como se muestra a continuación:
-\begin{figure}[h]
-  \includegraphics[width=10cm]{build.PNG}
-  \centering
-  \caption{Seleccion de Kit de construccion.}
-  \label{fig:build}
-\end{figure}
+\\
+\\
+\includegraphics[width=10cm]{explorador_archivos.PNG}
+\\
+\\
+Al hacer este paso, se abrirá de inmediatamente Qt y te preguntara con que kit desea construir el proyecto, como se muestra a continuación:
+\\
+\\
+\includegraphics[width=10cm]{build.PNG}
+\\
+\\
 Selecciona el de kit de confianza y presionas el botón “Configure Project”:
 \\
+\\
 \includegraphics[width=10cm]{configurar_proyecto.PNG}
+\\
 \\
 Ya que tenemos el proyecto completamente cargado en Qt, asegúrese que la imagen a la que usted desea aplicarle el algoritmo de redimensionamiento se encuenre en la siguiente ruta relativa:
 \begin{lstlisting}[language=C++, label=codigo_matrices_int]
 ../Algorithm_Resize_Img/BD/<nombre_de_la_imagen>
 \end{lstlisting}
 A continuación se mostrará como debe aparecer:
-\begin{figure}[h]
-  \includegraphics[width=10cm]{carpetaBD.PNG}
-  \centering
-  \caption{Direccion relativa.}
-  \label{fig:carpetaBD}
-\end{figure}
+\\
+\\
+\includegraphics[width=10cm]{carpetaBD.PNG}
+\\
+\\
 Luego de esto, puede presionar el Botón “Run” para ejecutar el programa:
+\\
+\\
+\includegraphics[width=10cm]{run.PNG}
+\\
+\\
+Aparecerá una consola tal como la siguiente:
+\\
+\\
+\includegraphics[width=10cm]{consola.PNG}
+\\
+\\
+En la que usted deberá ingresar el nombre de la imagen a redimensionar junto con su extensión:
+\\
+\\
+\includegraphics[width=10cm]{consola_con_string.PNG}
+\\
+\\
+Despues de escribir lo anterior, puede presionar la tecla enter, se aplicara el algoritmo de redimensionamiento y generara un archivo de texto con la informacion de la imagen redimensionada, tal como el siguiente:
 \begin{figure}[h]
-  \includegraphics[width=10cm]{run.PNG}
+  \includegraphics[width=10cm]{salida.PNG}
   \centering
-  \caption{Boton "Run".}
-  \label{fig:run}
+  \caption{Archivo de salida.}
+  \label{fig:salida}
 \end{figure}
 \subsection{En Tinkercad.}
 Luego de haber ejecutado satisfactoriamente el programa de redimensionamiento de Imágenes, iremos a la Carpeta DB, ubicada dentro del proyecto de Qt, en la cual podemos encontrar archivo de texto titulado “ImgResize.txt”, allí podremos encontrar la información de la imagen redimensionada dividida en 3 matrices unidimensionales, las cuales representara la intensidad del Rojo, Verde o Azul en números enteros de 0 a 255
 \\
+\\
+\includegraphics[width=10cm]{info_img_txt.PNG}
+\\
+\\
 Después de esto, procedemos a abrir el proyecto de Tinkercad, presionaremos el Botón “Código”, ubicado en la parte superior derecha de la pagina.
-\begin{figure}[h]
-  \includegraphics[width=10cm]{codigo.PNG}
-  \centering
-  \caption{Boton "Código".}
-  \label{fig:Codigo}
-\end{figure}
-Procederemos a pegar la información del archivo “ImgResize.txt” en la línea número 19, de lo contrario el programa no funcionara de forma correcta, como e muestra en la siguiente imagen:
-\begin{figure}[h]
-  \includegraphics[width=10cm]{matrices.PNG}
-  \centering
-  \caption{Matrices del archivo en el Código.}
-  \label{fig:matrices}
-\end{figure}
+\\
+\\
+\includegraphics[width=10cm]{codigo.PNG}
+\\
+\\
+Procederemos a pegar la información del archivo “ImgResize.txt” en la línea número 19, de lo contrario el programa no funcionara de forma correcta, como se muestra en la siguiente imagen:
+\\
+\\
+\includegraphics[width=10cm]{matrices.PNG}
+\\
+\\
 Luego de esto, podemos presionar en el botón “Iniciar simulación”, el cual se encuentra al lado derecho del botón “Código”.
-\begin{figure}[h]
-  \includegraphics[width=10cm]{iniciar_simulacion.PNG}
-  \centering
-  \caption{Botón "Iniciar simulación".}
-  \label{fig:iniciar_simulacion}
-\end{figure}
+\\
+\\
+\includegraphics[width=10cm]{iniciar_simulacion.PNG}
+\\
+\\
 Si desea evidenciar el valor que se le esta asignando a cada Píxel, puede dar un click en el Monitor Serial de Tinkercad, el cual se encuentra en la parte inferior del Código.
-\begin{figure}[h]
-  \includegraphics[width=10cm]{monitor_serial.PNG}
-  \centering
-  \caption{Monitor serial.}
-  \label{fig:monitor_serial}
-\end{figure}
+\\
+\\
+\includegraphics[width=10cm]{monitor_serial.PNG}
+\\
+\\
 Debe esperar hasta que el software envíe la información a cada LED de la matriz, una vez este proceso termine, inmediatamente se verá reflejado el resultado en la matriz como se muestra a continuación:
 \begin{figure}[h]
   \includegraphics[width=10cm]{resultado.PNG}
