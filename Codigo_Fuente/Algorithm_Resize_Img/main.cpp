@@ -5,14 +5,15 @@
 
 
 using namespace std;
-
+#define PATH_TO_FILES "../Algorithm_Resize_Img/BD/"
 int main()
 {
 
-    string fileName = "../Algorithm_Resize_Img/BD/brasil10x7.jpg";
-    string fileTxt = "../Algorithm_Resize_Img/BD/ImgResize.txt";
-
-    ImageResize imgR(16, 16, fileName, fileTxt);
+    string fileName = "";
+    string fileTxt = "ImgResize.txt";
+    cout << "Ingrese nombre de la imagen a redimensioar (ej: brasil.png): ";
+    cin >> fileName;
+    ImageResize imgR(16, 16, PATH_TO_FILES + fileName, PATH_TO_FILES + fileTxt);
     imgR.categorizeAlgorithm();
     imgR.SaveImgTxt();
 
